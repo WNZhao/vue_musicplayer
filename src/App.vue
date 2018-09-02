@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <m-header></m-header>
     <tab></tab>
     <router-view/>
   </div>
@@ -7,11 +8,13 @@
 
 <script type="text/ecmascript-6">
 /* eslint-disable */
+import MHeader from 'components/m-header/m-header'
 import Tab from 'src/components/tab/tab'
 console.log(Tab)
 export default {
   name: 'App',
   components: {
+    MHeader,
     Tab
   }
 }

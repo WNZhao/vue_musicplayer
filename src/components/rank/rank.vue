@@ -1,5 +1,5 @@
 <template>
-  <span>rank</span>
+  <span>Rankssss</span>
 </template>
 
 <script type="text/ecmascript-6">
