@@ -10,7 +10,7 @@
 /* eslint-disable */
 import MHeader from 'components/m-header/m-header'
 import Tab from 'src/components/tab/tab'
-console.log(Tab)
+
 export default {
   name: 'App',
   components: {
@@ -22,6 +22,5 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import "~common/stylus/variable"
-  #app
-    color: $color-theme
+  
 </style>
