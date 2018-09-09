@@ -5,7 +5,7 @@
       <div v-if="recommends.length"
            class="slider-wrapper"
            ref="sliderWrapper">
-        <slider>
+        <slider :len="recommends.length">
           <div class="slider-item"
                v-for="item in recommends"
                :key="item.id">

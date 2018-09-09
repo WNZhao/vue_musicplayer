@@ -7,8 +7,15 @@
 
 <script type="text/ecmascript-6">
 export default {
+  data () {
+    return {
+      boxWidth: 0
+    }
+  },
+  props: ["len"],
   name: "slider",
   mounted () {
+    console.log(this.len);
     console.log(this.$refs.sliderBox.offsetWidth)
   }
 }
