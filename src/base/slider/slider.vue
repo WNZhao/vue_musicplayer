@@ -21,6 +21,7 @@ export default {
   methods: {
     computeWidth () {
       const len = this.len;
+      // document.defaultView.getComputedStyle(html,null).width
       const wrapperWidth = window.innerWidth;
       const boxWidths = len * wrapperWidth + wrapperWidth;
       this.boxWidths.width = boxWidths + 'px';
