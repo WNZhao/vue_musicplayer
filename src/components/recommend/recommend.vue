@@ -5,17 +5,22 @@
       <div v-if="recommends.length"
            class="slider-wrapper"
            ref="sliderWrapper">
-        <slider :len="recommends.length">
-          <div class="slider-item"
-               v-for="item in recommends"
-               :key="item.id">
-            <a class="slider-img-link"
-               :href="item.linkUrl">
-              <img class="needsclick"
-                   @load="loadImage"
-                   :src="item.picUrl">
-            </a>
-          </div>
+        <slider v-if="recommends.length"
+                :len="recommends.length">
+          <template slot-scope="cssObj">
+            <div class="slider-item"
+                 v-for="item in recommends"
+                 :style="cssObj"
+                 :key="item.id">
+              <a class="slider-img-link"
+                 :href="item.linkUrl">
+                <img class="needsclick"
+                     @load="loadImage"
+                     :src="item.picUrl">
+              </a>
+            </div>
+          </template>
+
         </slider>
       </div>
       <div class="recommend-list">

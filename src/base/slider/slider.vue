@@ -1,7 +1,8 @@
 <template>
   <div class="slider-box"
+       :style="boxWidths"
        ref="sliderBox">
-    <slot></slot>
+    <slot :width="itemWidth"></slot>
   </div>
 </template>
 
@@ -9,21 +10,49 @@
 export default {
   data () {
     return {
-      boxWidth: 0
+      boxWidths: {
+        width: 'auto'
+      },
+      itemWidth: 'auto'
     }
   },
-  props: ["len"],
+  props: ["len", "recommends"],
   name: "slider",
+  methods: {
+    computeWidth () {
+      const len = this.len;
+      const wrapperWidth = window.innerWidth;
+      const boxWidths = len * wrapperWidth + wrapperWidth;
+      this.boxWidths.width = boxWidths + 'px';
+      this.itemWidth = wrapperWidth + 'px';
+      return boxWidths;
+    },
+    throttle (fn, sec = 300) {
+      let timeout = null;
+      return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          fn()
+        }, sec);
+      }
+    }
+  },
   mounted () {
-    console.log(this.len);
-    console.log(this.$refs.sliderBox.offsetWidth)
+    const that = this;
+    that.computeWidth();
+    window.onresize = this.throttle(function () {
+      that.computeWidth()
+    }, 300)
+  },
+  destroyed () {
+    window.onresize = null
   }
 }
 </script>
 
 <style scoped rel="stylesheet/stylus" lang='stylus'>
 .slider-box
-  height 400px
+  height 260px
   overflow hidden
   position relative
   .slider-item
