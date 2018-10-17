@@ -1,10 +1,11 @@
 <template>
   <div class="recommend"
        ref="recommend">
-    <div>
+    <div class="recommend-content">
       <div v-if="recommends.length"
            class="slider-wrapper"
            ref="sliderWrapper">
+           &nbsp;
         <slider v-if="recommends.length"
                 :len="recommends.length">
           <template slot-scope="cssObj">
@@ -23,11 +24,22 @@
 
         </slider>
       </div>
-      <div class="recommend-list">
+      
+        <div class="recommend-list">
         <h1 class="list-title">热门歌单推荐</h1>
         <ul>
+            <li v-for="item in discList" class="item" :key="item.dissid">
+                <div class="icon">
+                    <img :src="item.imgurl" alt="." width="60" height="60">
+                </div>
+                <div class="text">
+                    <h2 class="name" v-html="item.creator.name"></h2>
+                    <p class="desc" v-html="item.dissname"></p>
+                </div>
+            </li>
         </ul>
       </div>
+      
     </div>
     <router-view></router-view>
   </div>
@@ -35,6 +47,7 @@
 
 <script type="text/ecmascript-6">
 import Slider from 'base/slider/slider'
+import Scroll from 'base/scroll/scroll'
 import { getRecommend, getDiscList } from 'api/recommend'
 import { ERR_OK } from 'api/config'
 
@@ -75,15 +88,15 @@ export default {
     },
     _getDiscList () {
       getDiscList().then((res) => {
-          debugger;
           if (res.code === ERR_OK){
-              console.log(res.data.list);
+              this.discList = res.data.list;
           }
       })
     }
   },
   components: {
-    Slider
+    Slider,
+    Scroll
   }
 }
 </script>
@@ -102,8 +115,11 @@ export default {
     .slider-wrapper
       position relative
       width 100%
+      height 260px
       overflow hidden
     .recommend-list
+      overflow auto 
+      height 100%
       .list-title
         height 65px
         line-height 65px
@@ -113,6 +129,7 @@ export default {
       .item
         display flex
         box-sizing border-box
+        color red
         align-items center
         padding 0 20px 20px 20px
         .icon
